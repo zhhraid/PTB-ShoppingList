@@ -1,27 +1,13 @@
-// MainActivity.kt
 package com.example.shoppinglist
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -40,13 +26,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ShoppingListApp()
+                    // PANGGIL MainNavigation DI SINI
+                    MainNavigation()
                 }
             }
         }
     }
 }
 
+// Composable ini tetap ada, karena dipanggil oleh NavHost
 @Composable
 fun ShoppingListApp() {
     // State for the text in the new item input field
@@ -70,17 +58,16 @@ fun ShoppingListApp() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            // Accommodate for system bars like status bar and navigation bar
-            .padding(WindowInsets.safeDrawing.asPaddingValues())
             .padding(horizontal = 16.dp)
     ) {
-        Title()
+        // Title() // Title sekarang ada di TopAppBar, jadi bisa di-disable
+        Spacer(modifier = Modifier.height(16.dp))
         ItemInput(
             text = newItemText,
             onTextChange = { newItemText = it },
             onAddItem = {
                 if (newItemText.isNotBlank()) {
-                    shoppingItems.add(newItemText)
+                    shoppingItems.add(0, newItemText) // Tambahkan ke atas list
                     newItemText = "" // Clear the input field after adding
                 }
             }

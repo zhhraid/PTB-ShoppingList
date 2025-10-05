@@ -1,3 +1,5 @@
+// File: app/src/main/java/com/example/shoppinglist/ui/theme/Theme.kt
+
 package com.example.shoppinglist.ui.theme
 
 import android.os.Build
@@ -10,38 +12,37 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+// Menggunakan skema warna BIRU yang sudah ada di Color.kt
 private val DarkColorScheme = darkColorScheme(
-    primary = RedDark,
-    onPrimary = RedOn,
-    primaryContainer = RedDarkPrimaryContainer,
-    onPrimaryContainer = RedDarkOnPrimaryContainer,
-    secondary = RedSecondary,
-    secondaryContainer = RedDarkSecondaryContainer,
-    onSecondaryContainer = RedDarkOnSecondaryContainer,
-    background = RedDarkBackground,
-    onBackground = RedDarkOnBackground,
-    surface = RedSurfaceDark,
-    onSurface = RedOnSurfaceDark
+    primary = BlueDarkPrimaryContainer,
+    onPrimary = BlueDarkOnPrimaryContainer,
+    primaryContainer = BlueDarkPrimaryContainer,
+    onPrimaryContainer = BlueDarkOnPrimaryContainer,
+    secondary = BlueDarkSecondaryContainer,
+    onSecondaryContainer = BlueDarkOnSecondaryContainer,
+    background = BlueDarkBackground,
+    onBackground = BlueDarkOnBackground,
+    surface = BlueSurfaceDark,
+    onSurface = BlueOnSurfaceDark
 )
 
+// Menggunakan skema warna BIRU yang sudah ada di Color.kt
 private val LightColorScheme = lightColorScheme(
-    primary = RedLight,
-    onPrimary = RedOn,
-    primaryContainer = RedPrimaryContainer,
-    onPrimaryContainer = RedOnPrimaryContainer,
-    secondary = RedSecondary,
-    secondaryContainer = RedSecondaryContainer,
-    onSecondaryContainer = RedOnSecondaryContainer,
-    background = RedBackground,
-    onBackground = RedOnBackground,
-    surface = RedSurface,
-    onSurface = RedOnSurface
+    primary = BlueLight,
+    onPrimary = BlueOn,
+    primaryContainer = BluePrimaryContainer,
+    onPrimaryContainer = BlueOnPrimaryContainer,
+    secondary = BlueSecondary,
+    onSecondaryContainer = BlueOnSecondaryContainer,
+    background = BlueBackground,
+    onBackground = BlueOnBackground,
+    surface = BlueSurface,
+    onSurface = BlueOnSurface
 )
 
 @Composable
 fun ShoppingListTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
@@ -50,7 +51,6 @@ fun ShoppingListTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
